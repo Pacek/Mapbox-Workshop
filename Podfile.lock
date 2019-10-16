@@ -1,0 +1,16 @@
+PODS:
+  - Mapbox-iOS-SDK-stripped (5.4.0-stripped)
+
+DEPENDENCIES:
+  - Mapbox-iOS-SDK-stripped (from `https://raw.githubusercontent.com/mapbox/mapbox-gl-native/ios-v5.4.0/platform/ios/Mapbox-iOS-SDK-stripped.podspec`)
+
+EXTERNAL SOURCES:
+  Mapbox-iOS-SDK-stripped:
+    :podspec: https://raw.githubusercontent.com/mapbox/mapbox-gl-native/ios-v5.4.0/platform/ios/Mapbox-iOS-SDK-stripped.podspec
+
+SPEC CHECKSUMS:
+  Mapbox-iOS-SDK-stripped: c753f2cacd95045e381b88990e35a58ea7213205
+
+PODFILE CHECKSUM: c0a719fa062f20adee1b8a257133930a14c6688c
+
+COCOAPODS: 1.7.5
