@@ -166,73 +166,8 @@ class ViewController: UIViewController {
         /* set the stroke width - border width */
         layer.circleStrokeWidth = NSExpression(forConstantValue: Float(2))
 
-        /*
-         * Here we'll use advanced Expressions to dynamically
-         * style the layer based on the Feature attributes.
-         *
-         * It's called data-driven styling and it sooooo powerful...
-         *
-         *
-         * Use Conditional Expression to vary the circle color
-         * based on the is_delayed attribute.
-         *
-         * If is_delayed is true - use red color, otherwise green.
-         *
-         */
-        layer.circleColor = NSExpression(
-            forConditional: NSPredicate(format: "is_delayed = YES"),
-            trueExpression: NSExpression(forConstantValue: UIColor.red),
-            falseExpression: NSExpression(forConstantValue: UIColor.green)
-        )
-
-        /*
-         * We'll use the pizza_count attribute
-         * to determine the size (radius) of the circles.
-         *
-         * Radius steps is a dictionary of pizza_count:radius pairs.
-         *
-         */
-        let radiusSteps: [Int: Float] = [
-            1: Float(8),
-            3: Float(12),
-            5: Float(20),
-            9: Float(24)
-        ]
-
-        /*
-         * Use Stepping Expression to vary the circle color
-         * based on the is_delayed attribute.
-         *
-         * If is_delayed is true - use red color, otherwise green.
-         *
-         */
-        layer.circleRadius = NSExpression(
-            forMGLStepping: NSExpression(forKeyPath: "pizza_count"),
-            from: NSExpression(forConstantValue: Float(10)),
-            stops: NSExpression(forConstantValue: radiusSteps)
-        )
-        /* set the opacity of the circles */
-        layer.circleOpacity = createOpacityExpression()
-        /* set the opacity of the circle borders */
-        layer.circleStrokeOpacity = createOpacityExpression()
-
         /* add the Layer to the map Style */
         style.addLayer(layer)
-    }
-    
-    /* create expression that fades layer above zoom level 11 */
-    func createOpacityExpression() -> NSExpression {
-        let zoomBreakpoint: Float = 11.0
-        let opacityStops: [Float: NSExpression] = [
-            zoomBreakpoint: NSExpression(forConstantValue: Float(0)),
-            zoomBreakpoint + 0.1: NSExpression(forConstantValue: Float(1))
-        ]
-        return NSExpression(
-            forMGLInterpolating: NSExpression.zoomLevelVariable,
-            curveType: .linear,
-            parameters: nil,
-            stops: NSExpression(forConstantValue: opacityStops)
-        )
     }
 
 }
