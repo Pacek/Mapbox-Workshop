@@ -211,28 +211,9 @@ class ViewController: UIViewController {
             from: NSExpression(forConstantValue: Float(10)),
             stops: NSExpression(forConstantValue: radiusSteps)
         )
-        /* set the opacity of the circles */
-        layer.circleOpacity = createOpacityExpression()
-        /* set the opacity of the circle borders */
-        layer.circleStrokeOpacity = createOpacityExpression()
 
         /* add the Layer to the map Style */
         style.addLayer(layer)
-    }
-    
-    /* create expression that fades layer above zoom level 11 */
-    func createOpacityExpression() -> NSExpression {
-        let zoomBreakpoint: Float = 11.0
-        let opacityStops: [Float: NSExpression] = [
-            zoomBreakpoint: NSExpression(forConstantValue: Float(0)),
-            zoomBreakpoint + 0.1: NSExpression(forConstantValue: Float(1))
-        ]
-        return NSExpression(
-            forMGLInterpolating: NSExpression.zoomLevelVariable,
-            curveType: .linear,
-            parameters: nil,
-            stops: NSExpression(forConstantValue: opacityStops)
-        )
     }
 
 }
